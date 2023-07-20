@@ -25,19 +25,44 @@ function Index({ data, nextPage }: PageProps) {
 
   async function handleSearch(searchItem: string) {
     setIsLoading(true);
-    try {
-      const response = await axios.get("/api/jobs", {
+    if(searchItem){
+      try {
+        const response = await axios.get("/api/jobs", {
+          params: {
+            searchQuery: `${searchItem}`,
+            pageSize: "10",
+            pageNumber: "1",
+          },
+        });
+        setJobs(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    }
+    else{
+      const options = {
+        method: "GET",
+        url: "https://jobsearch4.p.rapidapi.com/api/v2/Jobs/Search",
         params: {
-          searchQuery: `${searchItem}`,
-          pageSize: "10",
+          searchQuery: `all jobs`,
           pageNumber: "1",
+          PageSize: "30",
         },
-      });
-      setJobs(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
+        headers: {
+          "X-RapidAPI-Key": "3eacc72e4amshb5e94d827aaf7acp12ece2jsnec5609b4f77e",
+          "X-RapidAPI-Host": "jobsearch4.p.rapidapi.com",
+        },
+      };
+      try {
+        const response = await axios.request(options);
+        setJobs(response.data.data)
+        setIsLoading(false)
+      }catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
     }
   }
 
@@ -76,16 +101,19 @@ function Index({ data, nextPage }: PageProps) {
             </h1>
             <section className="my-5">
               {/* Search Bar */}
-              <section className="flex items-center gap-2 w-full">
+              <section className="flex justify-between items-center gap-2 w-full">
                 <input
                   type="text"
                   className="bg-transparent text-black px-4 py-2 outline-none appearance-none border border-gray-500 w-[80%] lg:w-[90%]"
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value)
+                  }}
                 />
                 <button
                   onClick={() => handleSearch(input)}
-                  className="text-xl text-white bg-red-500 px-4 py-[0.6rem] lg:w-[10%] flex justify-center items-center"
+                  disabled={isLoading}
+                  className="text-xl text-white bg-red-500 px-4 py-[0.6rem] w-[20%] lg:w-[10%] flex justify-center items-center disabled:bg-gray-500 ease duration-500"
                 >
                   <AiOutlineSearch />
                 </button>
@@ -108,7 +136,10 @@ function Index({ data, nextPage }: PageProps) {
             </section>
           ) : (
             <section className="max-w-[1000px] mx-auto p-5 lg:p-0">
-              {jobs.map((job, index) => {
+            {
+              jobs.length > 0?
+                <section>
+                    {jobs.map((job, index) => {
                 return (
                   <JobCard
                     key={index}
@@ -129,6 +160,10 @@ function Index({ data, nextPage }: PageProps) {
                   <p>Show More</p>
                 </button>
               </section>
+                </section>
+                :
+                <h1 className="text-center py-16 header text-3xl">No Jobs Found.</h1>
+            }
             </section>
           )}
         </section>
