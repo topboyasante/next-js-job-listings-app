@@ -14,3 +14,22 @@ body{
 .header{
     font-family: 'Bebas Neue', sans-serif;
 }
+
+b,strong{
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+b{
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+strong{
+    font-size: 1.2em;
+    font-weight: 400;
+    /* display: block; */
+}
+
+li{
+    list-style: disc;
+}

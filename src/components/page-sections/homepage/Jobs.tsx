@@ -14,9 +14,10 @@ function Jobs({jobs}:{jobs:IJobType[]}) {
                    <JobCard
                    key={index}
                    name={job.title}
-                   company={job.jobSource}
+                   company={job.company}
                    tags={job.tags}
-                   url={job.url}
+                   slug={job.slug}
+                   jobSource={job.jobSource}
                    />
                 )
             })}
