@@ -11,7 +11,6 @@ type PageProps = {
 };
 
 function Index({ data }: PageProps) {
-  console.log(data);
   return (
     <>
     <Head>
