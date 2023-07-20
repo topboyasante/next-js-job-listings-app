@@ -9,6 +9,11 @@ body{
     background-color: #ffffff;
     color: #121212;
     font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+    display: none;
 }
 
 .header{
