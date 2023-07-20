@@ -71,7 +71,7 @@ function Index({ data, nextPage }: PageProps) {
         {/* Navbar */}
         <main className="mt-[10vh] bg-gray-200">
           <section className="max-w-[1000px] mx-auto p-5 lg:px-0">
-            <h1 className="text-center header lg:text-5xl">
+            <h1 className="text-center header text-3xl lg:text-5xl">
               FIND YOUR DREAM JOB
             </h1>
             <section className="my-5">
