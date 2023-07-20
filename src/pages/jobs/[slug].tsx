@@ -52,7 +52,7 @@ const DynamicPage: NextPage<DynamicPageProps> = ({ data }) => {
             </section>
           </section>
         </section>
-        <section className="max-w-[1000px] mx-auto my-2 p-5 lg:p-0">
+        <section className="max-w-[1000px] mx-auto my-2 py-5 px-10 lg:p-0">
           <section className="flex flex-col lg:flex-row justify-between gap-3">
             <div
               dangerouslySetInnerHTML={{
